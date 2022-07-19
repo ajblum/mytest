@@ -24,7 +24,7 @@ pipeline {
         branch 'main'
       }
       steps {
-        sh 'oc new-app --name mytest --image=quay.io/ajblum/hello-openshift:latest'
+        sh 'oc new-app --name mytest --docker-image=quay.io/ajblum/hello-openshift:latest'
         sh 'oc rollout status deployment/mytest --timeout 90s'
       }
     }
