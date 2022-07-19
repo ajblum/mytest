@@ -16,7 +16,7 @@ pipeline {
         branch 'main'
       }
       steps {
-        sh 'if oc delete project mytest 2>/dev/null; then echo "deleting mytest project"; oc wait --for=delete project/mytest --timeout=90s; else echo "skipping removal of mytest project"; fi'
+        sh 'if oc delete project mytest 2>/dev/null; then echo "deleting mytest project"; oc wait --for=delete namespace/mytest --timeout=90s; else echo "skipping removal of mytest project"; fi'
       }
     }
     stage ('create mytest project') {
