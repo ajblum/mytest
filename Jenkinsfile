@@ -24,7 +24,6 @@ pipeline {
         branch 'main'
       }
       steps {
-        if (
         sh 'oc new-project mytest'
       }
     }
