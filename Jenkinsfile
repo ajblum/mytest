@@ -16,6 +16,8 @@ pipeline {
         branch 'main'
       }
       steps {
+        sh 'oc delete project mytest'
+        sh 'oc wait --for=delete project/mytest --timeout=90s'
         sh 'oc new-project mytest'
       }
     }
