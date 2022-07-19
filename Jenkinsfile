@@ -49,7 +49,7 @@ pipeline {
         branch 'main'
       }
       steps {
-        sh 'curl -s --fail http://mytest-mytest.apps.ocp4.example.com'
+        sh 'curl -s -o /dev/null --fail http://mytest-mytest.apps.ocp4.example.com'
       }
     }
   }
