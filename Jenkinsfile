@@ -11,13 +11,21 @@ pipeline {
     }
   }
   stages {
-    stage ('create project') {
+    stage ('cleanup mytest project') {
       when {
         branch 'main'
+        sh 'oc get project mytest'
       }
       steps {
         sh 'oc delete project mytest || true'
         sh 'oc wait --for=delete project/mytest --timeout=90s'
+      }
+    }
+    stage ('create mytest project') {
+      when {
+        branch 'main'
+      }
+      steps {
         sh 'oc new-project mytest'
       }
     }
