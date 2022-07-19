@@ -14,11 +14,9 @@ pipeline {
     stage ('cleanup mytest project') {
       when {
         branch 'main'
-        sh 'oc get project mytest'
       }
       steps {
-        sh 'oc delete project mytest || true'
-        sh 'oc wait --for=delete project/mytest --timeout=90s'
+        sh 'if oc delete project mytest 2>/dev/null; then echo "deleting mytest project"; oc wait --for=delete project/mytest --timeout=90s; else echo "skipping removal of mytest project"; fi'
       }
     }
     stage ('create mytest project') {
@@ -26,6 +24,7 @@ pipeline {
         branch 'main'
       }
       steps {
+        if (
         sh 'oc new-project mytest'
       }
     }
